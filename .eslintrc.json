@@ -9,5 +9,8 @@
         "sourceType": "module"
     },
     "ignorePatterns": ["__tests__", "dist", "node_modules"],
-    "rules": {}
+    "rules": {
+        "no-plusplus": "off",
+        "no-console": "off"
+    }
 }
