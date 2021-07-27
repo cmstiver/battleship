@@ -8,7 +8,7 @@ function createGameBoard() {
         selectedPlayer = 'player2';
       }
       let shipObj = this.shipPositions[selectedPlayer][ship.name];
-      shipObj = { ...shipObj, ...ship, ...{ coords: [] } };
+      shipObj = { ...shipObj, ...ship, ...{ coords: {} } };
       if (axis === 'x') {
         for (let i = 0; i < ship.length; i++) {
           const newCoords = [coords[0] + i, coords[1]];

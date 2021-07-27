@@ -7,9 +7,9 @@ import {
 it('ship places', () => {
   const game = createGameBoard();
   game.placeShip(destroyer, [1, 1], 'x', 1);
-  expect(game.shipPositions.player1.Destroyer.coords).toEqual([
-    [1, 1],
-    [2, 1],
-    [3, 1],
-  ]);
+  expect(game.shipPositions.player1.destroyer.coords).toEqual({
+    '1,1': { isHit: false },
+    '2,1': { isHit: false },
+    '3,1': { isHit: false },
+  });
 });
