@@ -1,5 +1,3 @@
-import './style.css';
-
 function createShip(shipLength) {
   function createHitArray(length) {
     const a = new Array(length);
