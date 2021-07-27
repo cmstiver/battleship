@@ -106,7 +106,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, style) {\
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gameboard */ \"./src/js/modules/gameboard.js\");\n/* harmony import */ var _modules_ships__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/ships */ \"./src/js/modules/ships.js\");\n\n\n\n\nconst game = (0,_modules_gameboard__WEBPACK_IMPORTED_MODULE_1__.default)();\ngame.placeShip(_modules_ships__WEBPACK_IMPORTED_MODULE_2__.destroyer, [1, 1], 'x', 1);\n\nconsole.log(game);\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gameboard */ \"./src/js/modules/gameboard.js\");\n/* harmony import */ var _modules_ships__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/ships */ \"./src/js/modules/ships.js\");\n\n\n\n\nconst game = (0,_modules_gameboard__WEBPACK_IMPORTED_MODULE_1__.default)();\ngame.placeShip(_modules_ships__WEBPACK_IMPORTED_MODULE_2__.destroyer, [1, 1], 'x', 1);\n\ngame.shipPositions.player1.destroyer.hit('1,1');\n\nconsole.log(game.shipPositions);\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
 
 /***/ }),
 
@@ -116,7 +116,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction createShip(name, length) {\n  return {\n    hit(coords) {},\n    isSunk() {},\n    name,\n    length,\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createShip);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/createShip.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction createShip(name, length) {\n  return {\n    hit(coords) {\n      this.coords[coords].isHit = true;\n    },\n    isSunk() {},\n    name,\n    length,\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createShip);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/createShip.js?");
 
 /***/ }),
 
