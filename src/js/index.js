@@ -6,7 +6,5 @@ import {
 
 const game = createGameBoard();
 game.placeShip(destroyer, [1, 1], 'x', 1);
-
 game.shipPositions.player1.destroyer.hit('1,1');
-
-console.log(game.shipPositions);
+console.log(game.shipPositions.player1.destroyer);
