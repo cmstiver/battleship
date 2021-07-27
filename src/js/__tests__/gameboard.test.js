@@ -13,3 +13,10 @@ it('ship places', () => {
     '3,1': { isHit: false },
   });
 });
+
+it('hits position', () => {
+  const game = createGameBoard();
+  game.placeShip(destroyer, [1, 1], 'x', 1);
+  game.shipPositions.player1.destroyer.hit('1,1');
+  expect(game.shipPositions.player1.destroyer.coords['1,1'].isHit).toBe(true);
+});
