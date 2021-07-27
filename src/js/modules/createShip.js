@@ -1,6 +1,8 @@
 function createShip(name, length) {
   return {
-    hit(coords) {},
+    hit(coords) {
+      this.coords[coords].isHit = true;
+    },
     isSunk() {},
     name,
     length,
