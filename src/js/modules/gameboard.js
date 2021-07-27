@@ -1,13 +1,7 @@
 function createGameBoard() {
   return {
-    placeShip(ship, coords, axis, player) {
-      let selectedPlayer;
-      if (player === 1) {
-        selectedPlayer = 'player1';
-      } else if (player === 2) {
-        selectedPlayer = 'player2';
-      }
-      let shipObj = this.gameState[selectedPlayer].ships[ship.name];
+    placeShip(ship, coords, axis) {
+      let shipObj = this.boardState.ships[ship.name];
       shipObj = { ...shipObj, ...ship, ...{ coords: {} } };
       if (axis === 'x') {
         for (let i = 0; i < ship.length; i++) {
@@ -20,32 +14,39 @@ function createGameBoard() {
           shipObj.coords[newCoords] = { isHit: false };
         }
       }
-      this.gameState[selectedPlayer][ship.name] = shipObj;
+      this.boardState.ships[ship.name] = shipObj;
     },
-    receiveAttack(coords, defendingPlayer) {
-      const player = this.gameState[defendingPlayer].ships;
-      const playerArray = Object.keys(player);
+    receiveAttack(coords) {
+      const coordsStr = coords.toString();
+      const { ships } = this.boardState;
+      const shipsArray = Object.keys(ships);
       let hit = false;
-      playerArray.forEach((ship) => {
-        if (Object.keys(player[ship].coords).includes(coords) === true) {
-          player[ship].hit(coords);
+      shipsArray.forEach((ship) => {
+        if (Object.keys(ships[ship].coords).includes(coordsStr) === true) {
+          ships[ship].hit(coords);
           hit = true;
         }
       });
       if (hit === false) {
-        this.gameState[defendingPlayer].dodgedShots.push(coords);
+        this.boardState.dodgedShots.push(coords);
       }
+      console.log(this.isGameOver());
     },
-    isGameOver() {},
-    gameState: {
-      player1: {
-        ships: {},
-        dodgedShots: [],
-      },
-      player2: {
-        ships: {},
-        dodgedShots: [],
-      },
+    isGameOver() {
+      const { ships } = this.boardState;
+      const shipsArray = Object.keys(ships);
+      const sunkArray = [];
+      shipsArray.forEach((ship) => {
+        sunkArray.push(ships[ship].isSunk());
+      });
+      if (sunkArray.every((value) => value === true)) {
+        return true;
+      }
+      return false;
+    },
+    boardState: {
+      ships: {},
+      dodgedShots: [],
     },
   };
 }
