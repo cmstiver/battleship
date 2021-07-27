@@ -1,7 +1,8 @@
-function createShip(length) {
+function createShip(name, length) {
   return {
     hit() {},
     isSunk() {},
+    name,
     length,
   };
 }

@@ -106,7 +106,37 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, style) {\
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gameboard */ \"./src/js/modules/gameboard.js\");\n/* harmony import */ var _modules_ships__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/ships */ \"./src/js/modules/ships.js\");\n\n\n\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/modules/createShip.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/createShip.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction createShip(name, length) {\n  return {\n    hit() {},\n    isSunk() {},\n    name,\n    length,\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createShip);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/createShip.js?");
+
+/***/ }),
+
+/***/ "./src/js/modules/gameboard.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/gameboard.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction createGameBoard() {\n  return {\n    placeShip(ship, coords, axis) {\n      this.shipPositions[ship.name] = {\n        coords: [],\n      };\n      if (axis === 'x') {\n        for (let i = 0; i < ship.length; i++) {\n          const newCoords = [coords[0] + i, coords[1]];\n          this.shipPositions[ship.name].coords.push(newCoords);\n        }\n      }\n    },\n    receiveAttack() {},\n    isGameOver() {},\n    shipPositions: {},\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createGameBoard);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/gameboard.js?");
+
+/***/ }),
+
+/***/ "./src/js/modules/ships.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/ships.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"carrier\": () => (/* binding */ carrier),\n/* harmony export */   \"battleship\": () => (/* binding */ battleship),\n/* harmony export */   \"destroyer\": () => (/* binding */ destroyer),\n/* harmony export */   \"submarine\": () => (/* binding */ submarine),\n/* harmony export */   \"patrolBoat\": () => (/* binding */ patrolBoat)\n/* harmony export */ });\n/* harmony import */ var _createShip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createShip */ \"./src/js/modules/createShip.js\");\n\n\nconst carrier = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('Carrier', 5);\nconst battleship = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('Battleship', 4);\nconst destroyer = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('Destroyer', 3);\nconst submarine = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('Submarine', 3);\nconst patrolBoat = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('Patrol Boat', 2);\n\n\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/ships.js?");
 
 /***/ })
 
