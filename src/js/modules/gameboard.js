@@ -12,12 +12,12 @@ function createGameBoard() {
       if (axis === 'x') {
         for (let i = 0; i < ship.length; i++) {
           const newCoords = [coords[0] + i, coords[1]];
-          shipObj.coords.push(newCoords);
+          shipObj.coords[newCoords] = { isHit: false };
         }
       } else if (axis === 'y') {
         for (let i = 0; i < ship.length; i++) {
           const newCoords = [coords[0], coords[1] + i];
-          shipObj.coords.push(newCoords);
+          shipObj.coords[newCoords] = { isHit: false };
         }
       }
       this.shipPositions[selectedPlayer][ship.name] = shipObj;

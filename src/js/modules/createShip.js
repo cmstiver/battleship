@@ -1,6 +1,6 @@
 function createShip(name, length) {
   return {
-    hit() {},
+    hit(coords) {},
     isSunk() {},
     name,
     length,
