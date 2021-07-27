@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import createShip from '../modules/ship';
+import createShip from '../modules/createShip';
 
 it('creates ship with correct position', () => {
   const destroyer = createShip();

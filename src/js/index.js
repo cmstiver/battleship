@@ -1,2 +1,2 @@
 import '../style.css';
-import createShip from './modules/ship';
+import createShip from './modules/createShip';
