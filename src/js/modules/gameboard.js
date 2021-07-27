@@ -7,7 +7,7 @@ function createGameBoard() {
       } else if (player === 2) {
         selectedPlayer = 'player2';
       }
-      let shipObj = this.shipPositions[selectedPlayer][ship.name];
+      let shipObj = this.gameState[selectedPlayer].ships[ship.name];
       shipObj = { ...shipObj, ...ship, ...{ coords: {} } };
       if (axis === 'x') {
         for (let i = 0; i < ship.length; i++) {
@@ -20,13 +20,32 @@ function createGameBoard() {
           shipObj.coords[newCoords] = { isHit: false };
         }
       }
-      this.shipPositions[selectedPlayer][ship.name] = shipObj;
+      this.gameState[selectedPlayer][ship.name] = shipObj;
     },
-    receiveAttack() {},
+    receiveAttack(coords, defendingPlayer) {
+      const player = this.gameState[defendingPlayer].ships;
+      const playerArray = Object.keys(player);
+      let hit = false;
+      playerArray.forEach((ship) => {
+        if (Object.keys(player[ship].coords).includes(coords) === true) {
+          player[ship].hit(coords);
+          hit = true;
+        }
+      });
+      if (hit === false) {
+        this.gameState[defendingPlayer].dodgedShots.push(coords);
+      }
+    },
     isGameOver() {},
-    shipPositions: {
-      player1: {},
-      player2: {},
+    gameState: {
+      player1: {
+        ships: {},
+        dodgedShots: [],
+      },
+      player2: {
+        ships: {},
+        dodgedShots: [],
+      },
     },
   };
 }

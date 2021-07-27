@@ -3,7 +3,9 @@ function createShip(name, length) {
     hit(coords) {
       this.coords[coords].isHit = true;
     },
-    isSunk() {},
+    isSunk() {
+      return Object.values(this.coords).every((value) => value.isHit === true);
+    },
     name,
     length,
   };
