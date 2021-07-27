@@ -30,7 +30,7 @@ function createGameBoard() {
       if (hit === false) {
         this.boardState.dodgedShots.push(coords);
       }
-      console.log(this.isGameOver());
+      this.isGameOver();
     },
     isGameOver() {
       const { ships } = this.boardState;

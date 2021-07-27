@@ -18,7 +18,5 @@ gameboard2.placeShip(destroyer, [3, 1], 'y');
 gameboard2.placeShip(submarine, [4, 1], 'y');
 gameboard2.placeShip(patrolBoat, [5, 1], 'y');
 
-gameboard1.receiveAttack([1, 1]);
-
 console.log(gameboard1.boardState);
 console.log(gameboard2.boardState);
