@@ -1,4 +1,4 @@
-function createGameBoard() {
+const createGameBoard = () => {
   const boardState = {
     ships: {},
     dodgedShots: [],
@@ -53,6 +53,6 @@ function createGameBoard() {
     isGameOver,
     boardState,
   };
-}
+};
 
 export default createGameBoard;
