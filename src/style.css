@@ -1,3 +1,22 @@
 body {
     background-color: gray;
 }
+#gameboards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+    background-color: aquamarine;
+    height: 600px;
+    width: 600px;
+}
+.square {
+    background-color: beige;
+    height: 58px;
+    width: 58px;
+    border-radius: 10px;
+    border: black solid 1px;
+}
