@@ -106,7 +106,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, style) {\
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gameboard */ \"./src/js/modules/gameboard.js\");\n/* harmony import */ var _modules_ships__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/ships */ \"./src/js/modules/ships.js\");\n/* harmony import */ var _modules_DOM__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/DOM */ \"./src/js/modules/DOM.js\");\n\n\n\n\n\n_modules_DOM__WEBPACK_IMPORTED_MODULE_3__.default.init();\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_DOM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/DOM */ \"./src/js/modules/DOM.js\");\n\n\n\n_modules_DOM__WEBPACK_IMPORTED_MODULE_1__.default.init();\n\n\n//# sourceURL=webpack://battleship/./src/js/index.js?");
 
 /***/ }),
 
@@ -117,36 +117,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst DOM = (() => {\n  const gameboards = document.querySelectorAll('.gameboard');\n  const populateSquares = () => {\n    gameboards.forEach((element) => {\n      for (let i = 0; i < 100; i++) {\n        const x = Math.floor((i + 10) / 10);\n        const y = i - Math.floor(i / 10) * 10 + 1;\n        const square = document.createElement('div');\n        square.classList.add('square');\n        square.setAttribute('data-coord', `[${x},${y}]`);\n        element.appendChild(square);\n      }\n    });\n  };\n  const init = () => {\n    populateSquares();\n  };\n  return {\n    init,\n  };\n})();\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DOM);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/DOM.js?");
-
-/***/ }),
-
-/***/ "./src/js/modules/createShip.js":
-/*!**************************************!*\
-  !*** ./src/js/modules/createShip.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction createShip(name, length) {\n  return {\n    hit(coords) {\n      this.coords[coords].isHit = true;\n    },\n    isSunk() {\n      return Object.values(this.coords).every((value) => value.isHit === true);\n    },\n    name,\n    length,\n  };\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createShip);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/createShip.js?");
-
-/***/ }),
-
-/***/ "./src/js/modules/gameboard.js":
-/*!*************************************!*\
-  !*** ./src/js/modules/gameboard.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst createGameBoard = () => {\n  const boardState = {\n    ships: {},\n    dodgedShots: [],\n  };\n  const isGameOver = () => {\n    const { ships } = boardState;\n    const shipsArray = Object.keys(ships);\n    const sunkArray = [];\n    shipsArray.forEach((ship) => {\n      sunkArray.push(ships[ship].isSunk());\n    });\n    if (sunkArray.every((value) => value === true)) {\n      return true;\n    }\n    return false;\n  };\n  const placeShip = (ship, coords, axis) => {\n    let shipObj = boardState.ships[ship.name];\n    shipObj = { ...shipObj, ...ship, ...{ coords: {} } };\n    if (axis === 'x') {\n      for (let i = 0; i < ship.length; i++) {\n        const newCoords = [coords[0] + i, coords[1]];\n        shipObj.coords[newCoords] = { isHit: false };\n      }\n    } else if (axis === 'y') {\n      for (let i = 0; i < ship.length; i++) {\n        const newCoords = [coords[0], coords[1] + i];\n        shipObj.coords[newCoords] = { isHit: false };\n      }\n    }\n    boardState.ships[ship.name] = shipObj;\n  };\n  const receiveAttack = (coords) => {\n    const coordsStr = coords.toString();\n    const { ships } = boardState;\n    const shipsArray = Object.keys(ships);\n    let hit = false;\n    shipsArray.forEach((ship) => {\n      if (Object.keys(ships[ship].coords).includes(coordsStr) === true) {\n        ships[ship].hit(coords);\n        hit = true;\n      }\n    });\n    if (hit === false) {\n      boardState.dodgedShots.push(coords);\n    }\n    isGameOver();\n  };\n  return {\n    placeShip,\n    receiveAttack,\n    isGameOver,\n    boardState,\n  };\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (createGameBoard);\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/gameboard.js?");
-
-/***/ }),
-
-/***/ "./src/js/modules/ships.js":
-/*!*********************************!*\
-  !*** ./src/js/modules/ships.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"carrier\": () => (/* binding */ carrier),\n/* harmony export */   \"battleship\": () => (/* binding */ battleship),\n/* harmony export */   \"destroyer\": () => (/* binding */ destroyer),\n/* harmony export */   \"submarine\": () => (/* binding */ submarine),\n/* harmony export */   \"patrolBoat\": () => (/* binding */ patrolBoat)\n/* harmony export */ });\n/* harmony import */ var _createShip__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createShip */ \"./src/js/modules/createShip.js\");\n\n\nconst carrier = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('carrier', 5);\nconst battleship = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('battleship', 4);\nconst destroyer = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('destroyer', 3);\nconst submarine = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('submarine', 3);\nconst patrolBoat = (0,_createShip__WEBPACK_IMPORTED_MODULE_0__.default)('patrolBoat', 2);\n\n\n\n\n//# sourceURL=webpack://battleship/./src/js/modules/ships.js?");
 
 /***/ })
 
