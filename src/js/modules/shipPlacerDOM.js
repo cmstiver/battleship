@@ -187,6 +187,7 @@ const place = (() => {
   const makeSecondWindow = () => {
     document.querySelector('#start-container').innerHTML = `
         <div class="start">
+          <h1>Player 2, place your ships.</h1>
           <div id="shipPlacer" class="gameboard"></div>
           <button>X</button>
         </div>

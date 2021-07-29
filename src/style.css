@@ -1,10 +1,19 @@
 body {
-    background-color: gray;
+    background-color: #0d1117;
     margin: 0;
+    color: #c9d1d9;
+    font-family: monospace;
+}
+input {
+    color: #c9d1d9;
+}
+button {
+    color: #c9d1d9;
+    border-radius: 10px;
 }
 #player-selection {
     position: fixed;
-    background-color: cornflowerblue;
+    background-color: #0d1117;
     height: 100%;
     width: 100%;
     top: 0px;
@@ -26,6 +35,9 @@ body {
     margin-top: 20px;
     height: 60px;
     width: 300px;
+    background-color: #161b22;
+    border: #c9d1d9 1px solid;
+    border-radius: 10px;
 }
 #comp {
     position: absolute;
@@ -33,6 +45,9 @@ body {
     top: 108px;
     height: 60px;
     width: 60px;
+    background-color: #343c47;
+    border: none;
+    cursor: pointer;
 }
 #submit {
     width: 80px;
@@ -40,10 +55,13 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    background-color: #343c47;
+    border: none;
+    cursor: pointer;
 }
 .start {
     position: fixed;
-    background-color: cornflowerblue;
+    background-color: #0d1117;
     height: 100%;
     width: 100%;
     top: 0px;
@@ -52,13 +70,19 @@ body {
 }
 .start button {
     display: block;
-    margin: auto;
-    height: 50px;
-    width: 50px;
+    width: 80px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #343c47;
+    border: none;
+    cursor: pointer;
+    font-size: xx-large;
 }
 #shipPlacer {
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
 }
 #gameboards-container {
     display: block;
@@ -70,35 +94,39 @@ body {
     margin-top: 25px;
     margin-bottom: 25px;
     grid-template-columns: repeat(10, auto);
-    background-color: aquamarine;
+    background-color: #161b22;
     height: 600px;
     width: 600px;
 }
 .square {
-    background-color: beige;
+    background-color: #30363d;
     height: 58px;
     width: 58px;
     border-radius: 10px;
     border: black solid 1px;
+    cursor: pointer;
+}
+.square:hover {
+    background-color: #454e58;
 }
 .square-occupied {
     background-color: rgb(117, 117, 105);
 }
 .miss {
-    background-color: blue;
+    background-color: rgb(18, 18, 144);
 }
 .hit {
-    background-color: red;
+    background-color: rgb(168, 2, 2);
 }
 .skull {
-    background-color: black;
+    background-color: rgb(34, 34, 34);
 }
 .shadow {
     background-color: gray;
 }
 #pass {
     position: fixed;
-    background-color: cornflowerblue;
+    background-color: #0d1117;
     height: 100%;
     width: 100%;
     top: 0px;
@@ -111,6 +139,8 @@ body {
     width: 300px;
     margin: auto;
     margin-top: 200px;
+    background-color: #343c47;
+    font-size: xx-large;
 }
 h1 {
     text-align: center;
