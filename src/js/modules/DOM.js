@@ -2,7 +2,6 @@ import AI from './ai';
 import { Players, Boards } from '../index';
 
 const DOM = (() => {
-  const playerArray = ['player1Board', 'player2Board'];
   const gameboards = document.querySelectorAll('.gameboard');
   const populateSquares = () => {
     gameboards.forEach((element) => {
@@ -16,16 +15,14 @@ const DOM = (() => {
       }
     });
   };
-  const markShipPos = () => {
-    playerArray.forEach((player) => {
-      const { ships } = Boards[player].boardState;
-      const shipsArray = Object.keys(ships);
-      shipsArray.forEach((ship) => {
-        const shipCoords = Object.keys(ships[ship].coords);
-        shipCoords.forEach((coord) => {
-          const square = document.querySelector(`#${player} [data-coord='${coord}']`);
-          square.classList.add('square-occupied');
-        });
+  const markShipPos = (player) => {
+    const { ships } = Boards[player].boardState;
+    const shipsArray = Object.keys(ships);
+    shipsArray.forEach((ship) => {
+      const shipCoords = Object.keys(ships[ship].coords);
+      shipCoords.forEach((coord) => {
+        const square = document.querySelector(`#${player} [data-coord='${coord}']`);
+        square.classList.add('square-occupied');
       });
     });
   };

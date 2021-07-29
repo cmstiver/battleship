@@ -1,5 +1,5 @@
 import DOM from './DOM';
-import { Boards } from '../index';
+import { Boards, Players } from '../index';
 import {
   carrier, battleship, destroyer, submarine, patrolBoat,
 } from './ships';
@@ -34,9 +34,11 @@ const place = (() => {
       case 4:
         if (Boards.player1Board.placeShip(patrolBoat, newCoord, axis) === true) {
           document.querySelector('#start').remove();
-          DOM.markShipPos();
           DOM.addEventListeners();
           DOM.setTurn('player1Board');
+          if (Players.player2.type === 'comp') {
+            DOM.markShipPos('player1Board');
+          }
         }
         break;
       default:
