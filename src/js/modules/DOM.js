@@ -1,3 +1,4 @@
+import AI from './ai';
 import gameLogic from './gameLogic';
 
 const DOM = (() => {
@@ -14,9 +15,6 @@ const DOM = (() => {
         element.appendChild(square);
       }
     });
-  };
-  const init = () => {
-    populateSquares();
   };
   const markShipPos = () => {
     playerArray.forEach((player) => {
@@ -54,12 +52,17 @@ const DOM = (() => {
       });
     });
   };
-  const launchAttack = (e) => {
-    const playerBoard = e.target.parentElement.id;
-    const { coord } = e.path[0].dataset;
-    gameLogic[`${playerBoard}`].receiveAttack(coord);
-    markMiss(playerBoard);
-    markHit(playerBoard);
+  const setTurn = (player) => {
+    if (player === 'player1Board') {
+      const playerBoard = document.querySelector('#player1Board');
+      playerBoard.replaceWith(playerBoard.cloneNode(true));
+    } else if (player === 'player2Board') {
+      const playerBoard = document.querySelector('#player2Board');
+      playerBoard.replaceWith(playerBoard.cloneNode(true));
+      if (gameLogic.player2.type === 'comp') {
+        AI.selectCoord();
+      }
+    }
   };
   const displayWin = (player) => {
     alert(`${player} wins`);
@@ -67,10 +70,28 @@ const DOM = (() => {
   const addEventListeners = () => {
     const squares = document.querySelectorAll('.square');
     squares.forEach((square) => {
-      square.addEventListener('click', launchAttack);
+      square.addEventListener('click', getCoord);
     });
   };
+  function getCoord(e) {
+    const playerBoard = e.target.parentElement.id;
+    const { coord } = e.path[0].dataset;
+    launchAttack(playerBoard, coord);
+  }
+  function launchAttack(playerBoard, coord) {
+    gameLogic[`${playerBoard}`].receiveAttack(coord);
+    markMiss(playerBoard);
+    markHit(playerBoard);
+    addEventListeners();
+    setTurn(playerBoard);
+  }
+  const init = () => {
+    populateSquares();
+    addEventListeners();
+  };
   return {
+    launchAttack,
+    setTurn,
     init,
     markShipPos,
     addEventListeners,

@@ -12,6 +12,7 @@
     "rules": {
         "no-plusplus": "off",
         "no-console": "off",
-        "import/no-cycle": "off"
+        "import/no-cycle": "off",
+        "no-use-before-define": "off"
     }
 }
