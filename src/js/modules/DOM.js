@@ -88,12 +88,28 @@ const DOM = (() => {
     launchAttack(playerBoard, coord);
   }
   function launchAttack(playerBoard, coord) {
+    const alreadyShot = Boards[playerBoard].boardState.dodgedShots;
+    const alreadyShot2 = [];
+    const { ships } = Boards[playerBoard].boardState;
+    const shipsArray = Object.keys(ships);
+    shipsArray.forEach((ship) => {
+      const coordArray = Object.keys(ships[ship].coords);
+      coordArray.forEach((coord2) => {
+        if (ships[ship].coords[coord2].isHit === true) {
+          alreadyShot2.push(coord2);
+        }
+      });
+    });
+    if (alreadyShot.includes(coord) || alreadyShot2.includes(coord)) {
+      return false;
+    }
     Boards[`${playerBoard}`].receiveAttack(coord);
     markMiss(playerBoard);
     markHit(playerBoard);
     markSunkShips(playerBoard);
     addEventListeners();
     setTurn(playerBoard);
+    return true;
   }
   return {
     populateSquares,

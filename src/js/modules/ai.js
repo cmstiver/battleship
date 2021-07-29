@@ -63,23 +63,9 @@ const AI = (() => {
     }
   }
   function selectCoord() {
-    const alreadyShot = Boards.player1Board.boardState.dodgedShots;
-    const alreadyShot2 = [];
-    const { ships } = Boards.player1Board.boardState;
-    const shipsArray = Object.keys(ships);
-    shipsArray.forEach((ship) => {
-      const coordArray = Object.keys(ships[ship].coords);
-      coordArray.forEach((coord) => {
-        if (ships[ship].coords[coord].isHit === true) {
-          alreadyShot2.push(coord);
-        }
-      });
-    });
     const coord = randomizeCoord();
-    if (alreadyShot.includes(coord) || alreadyShot2.includes(coord)) {
+    if (DOM.launchAttack('player1Board', coord) === false) {
       selectCoord();
-    } else {
-      DOM.launchAttack('player1Board', coord);
     }
   }
   return {
