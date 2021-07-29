@@ -59,14 +59,17 @@ const place = (() => {
           shadowLength = 5;
           axis = 'x';
           if (player === 'player1Board') {
-            makeSecondWindow();
+            if (Players.player2.type === 'comp') {
+              DOM.addEventListeners();
+              DOM.setTurn('player1Board');
+              DOM.markShipPos(player);
+            } else {
+              makeSecondWindow();
+            }
           }
           if (player === 'player2Board') {
             DOM.addEventListeners();
             DOM.setTurn('player1Board');
-            if (Players.player2.type === 'comp') {
-              DOM.markShipPos(player);
-            }
           }
           player = 'player2Board';
         }

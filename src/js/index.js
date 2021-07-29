@@ -7,7 +7,7 @@ import AI from './modules/ai';
 
 const Players = (() => {
   const player1 = createPlayer('name1', 'human');
-  const player2 = createPlayer('name2', 'human');
+  const player2 = createPlayer('name2', 'comp');
   return {
     player1,
     player2,
