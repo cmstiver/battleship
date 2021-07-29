@@ -67,11 +67,11 @@ const DOM = (() => {
       }
     });
   };
-  const passTurnScreen = () => {
+  const passTurnScreen = (name) => {
     const container = document.querySelector('#start-container');
     container.innerHTML = `
     <div id="pass">
-      <button onclick="this.parentNode.remove()">Pass</button>
+      <button onclick="this.parentNode.remove()">${name}'s Turn</button>
     </div>
     `;
   };
@@ -82,7 +82,7 @@ const DOM = (() => {
       unMarkShipPos();
       markShipPos('player1Board');
       if (Players.player2.type === 'human') {
-        passTurnScreen();
+        passTurnScreen(Players.player1.name);
       }
     } else if (player === 'player2Board') {
       const playerBoard = document.querySelector('#player2Board');
@@ -90,7 +90,7 @@ const DOM = (() => {
       unMarkShipPos();
       if (Players.player2.type === 'human') {
         markShipPos('player2Board');
-        passTurnScreen();
+        passTurnScreen(Players.player2.name);
       }
       if (Players.player2.type === 'comp') {
         AI.selectCoord();
@@ -99,6 +99,12 @@ const DOM = (() => {
   };
   const displayWin = (player) => {
     alert(`${player} wins`);
+  };
+  const changePlayerHeader = () => {
+    const player1 = document.querySelector('#player1header');
+    const player2 = document.querySelector('#player2header');
+    player1.textContent = `${Players.player1.name}:`;
+    player2.textContent = `${Players.player2.name}:`;
   };
   const addEventListeners = () => {
     const squares = document.querySelectorAll('#gameboards-container .square');
@@ -136,6 +142,7 @@ const DOM = (() => {
     return true;
   }
   return {
+    changePlayerHeader,
     populateSquares,
     launchAttack,
     setTurn,

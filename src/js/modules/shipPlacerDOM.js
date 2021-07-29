@@ -16,9 +16,18 @@ const place = (() => {
     const player1Input = document.querySelector('#player1input');
     const player2Input = document.querySelector('#player2input');
     const window = document.querySelector('#player-selection');
-    Players.player1 = createPlayer(player1Input.value, 'human');
-    Players.player2 = createPlayer(player2Input.value, playerType);
+    let player1Name = player1Input.value;
+    let player2Name = player2Input.value;
+    if (player1Name === '') {
+      player1Name = 'Player 1';
+    }
+    if (player2Name === '') {
+      player2Name = 'Player 2';
+    }
+    Players.player1 = createPlayer(player1Name, 'human');
+    Players.player2 = createPlayer(player2Name, playerType);
     window.remove();
+    DOM.changePlayerHeader();
     DOM.populateSquares();
     place.addDOMStuff();
     if (Players.player2.type === 'comp') {
