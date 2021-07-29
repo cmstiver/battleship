@@ -2,12 +2,11 @@ import '../style.css';
 import DOM from './modules/DOM';
 import place from './modules/shipPlacerDOM';
 import createGameBoard from './modules/gameboard';
-import createPlayer from './modules/createPlayers';
 import AI from './modules/ai';
 
 const Players = (() => {
-  const player1 = createPlayer('name1', 'human');
-  const player2 = createPlayer('name2', 'comp');
+  let player1;
+  let player2;
   return {
     player1,
     player2,
