@@ -46,6 +46,7 @@ const createGameBoard = () => {
       boardState.dodgedShots.push(coords);
     }
     isGameOver();
+    console.log(boardState);
   };
   return {
     placeShip,

@@ -31,9 +31,19 @@ const DOM = (() => {
       });
     });
   };
+  const addEventListeners = () => {
+    function coordLog(e) {
+      gameLogic[`${this.parentElement.id}`].receiveAttack(e.path[0].dataset.coord);
+    }
+    const squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+      square.addEventListener('click', coordLog);
+    });
+  };
   return {
     init,
     markShipPos,
+    addEventListeners,
   };
 })();
 

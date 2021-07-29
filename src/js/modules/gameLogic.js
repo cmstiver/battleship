@@ -6,6 +6,7 @@ import {
 const gameLogic = (() => {
   const player1Board = createGameBoard();
   const player2Board = createGameBoard();
+
   const populateShipsTemp = () => {
     player1Board.placeShip(carrier, [1, 1], 'y');
     player1Board.placeShip(battleship, [2, 1], 'y');
@@ -19,6 +20,7 @@ const gameLogic = (() => {
     player2Board.placeShip(submarine, [5, 1], 'y');
     player2Board.placeShip(patrolBoat, [6, 1], 'y');
   };
+
   return {
     player1Board,
     player2Board,
