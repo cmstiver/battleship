@@ -31,10 +31,6 @@ const hasSomeoneWon = () => {
   }
 };
 
-DOM.populateSquares();
-place.addDOMStuff();
-if (Players.player2.type === 'comp') {
-  AI.generateShips();
-}
+place.addPlayerSelectionEventListeners();
 
 export { Players, Boards, hasSomeoneWon };

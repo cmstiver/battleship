@@ -1,5 +1,7 @@
 import DOM from './DOM';
 import { Boards, Players } from '../index';
+import createPlayer from './createPlayers';
+import AI from './ai';
 import {
   carrier, battleship, destroyer, submarine, patrolBoat,
 } from './ships';
@@ -8,7 +10,37 @@ const place = (() => {
   let axis = 'x';
   let num = 0;
   let shadowLength = 5;
+  let playerType = 'comp';
   let player = 'player1Board';
+  const submitPlayers = () => {
+    const player1Input = document.querySelector('#player1input');
+    const player2Input = document.querySelector('#player2input');
+    const window = document.querySelector('#player-selection');
+    Players.player1 = createPlayer(player1Input.value, 'human');
+    Players.player2 = createPlayer(player2Input.value, playerType);
+    window.remove();
+    DOM.populateSquares();
+    place.addDOMStuff();
+    if (Players.player2.type === 'comp') {
+      AI.generateShips();
+    }
+  };
+  const changePlayerType = () => {
+    const compButton = document.querySelector('#comp');
+    if (playerType === 'comp') {
+      playerType = 'human';
+      compButton.textContent = 'Human';
+    } else {
+      playerType = 'comp';
+      compButton.textContent = 'Comp';
+    }
+  };
+  const addPlayerSelectionEventListeners = () => {
+    const submit = document.querySelector('#submit');
+    const compButton = document.querySelector('#comp');
+    submit.addEventListener('click', submitPlayers);
+    compButton.addEventListener('click', changePlayerType);
+  };
   const markShipPos = (plr) => {
     const { ships } = Boards[plr].boardState;
     const shipsArray = Object.keys(ships);
@@ -163,6 +195,7 @@ const place = (() => {
   };
 
   return {
+    addPlayerSelectionEventListeners,
     addDOMStuff,
   };
 })();
