@@ -1,4 +1,4 @@
-import gameLogic from './gameLogic';
+import { hasSomeoneWon } from '../index';
 
 const createGameBoard = () => {
   const boardState = {
@@ -17,6 +17,18 @@ const createGameBoard = () => {
     }
     return false;
   };
+  const checkIfValidPlacement = (array) => {
+    const comparison = [];
+    array.forEach((coord) => {
+      if (coord[0] > 10 || coord[0] < 0 || coord[1] > 10 || coord[1] < 0) {
+        comparison.push(false);
+      }
+    });
+    if (comparison.includes(false)) {
+      return false;
+    }
+    return true;
+  };
   const placeShip = (ship, coords, axis) => {
     let shipObj = boardState.ships[ship.name];
     shipObj = { ...shipObj, ...ship, ...{ coords: {} } };
@@ -31,7 +43,13 @@ const createGameBoard = () => {
         shipObj.coords[newCoords] = { isHit: false };
       }
     }
-    boardState.ships[ship.name] = shipObj;
+    const coordArray = [];
+    Object.keys(shipObj.coords).forEach((coord) => coordArray.push(coord.split(',')));
+    if (checkIfValidPlacement(coordArray)) {
+      boardState.ships[ship.name] = shipObj;
+      return true;
+    }
+    return false;
   };
   const receiveAttack = (coords) => {
     const coordsStr = coords.toString();
@@ -47,7 +65,7 @@ const createGameBoard = () => {
     if (hit === false) {
       boardState.dodgedShots.push(coords);
     }
-    gameLogic.hasSomeoneWon();
+    hasSomeoneWon();
   };
   return {
     placeShip,

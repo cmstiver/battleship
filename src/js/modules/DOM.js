@@ -1,5 +1,5 @@
 import AI from './ai';
-import gameLogic from './gameLogic';
+import { Players, Boards } from '../index';
 
 const DOM = (() => {
   const playerArray = ['player1Board', 'player2Board'];
@@ -18,7 +18,7 @@ const DOM = (() => {
   };
   const markShipPos = () => {
     playerArray.forEach((player) => {
-      const { ships } = gameLogic[player].boardState;
+      const { ships } = Boards[player].boardState;
       const shipsArray = Object.keys(ships);
       shipsArray.forEach((ship) => {
         const shipCoords = Object.keys(ships[ship].coords);
@@ -30,7 +30,7 @@ const DOM = (() => {
     });
   };
   const markMiss = (playerBoard) => {
-    gameLogic[playerBoard].boardState.dodgedShots.forEach((coord) => {
+    Boards[playerBoard].boardState.dodgedShots.forEach((coord) => {
       const square = document.querySelector(`#${playerBoard} [data-coord='${coord}']`);
       if (!square.classList.contains('miss')) {
         square.classList.add('miss');
@@ -38,7 +38,7 @@ const DOM = (() => {
     });
   };
   const markHit = (playerBoard) => {
-    const { ships } = gameLogic[playerBoard].boardState;
+    const { ships } = Boards[playerBoard].boardState;
     const shipsArray = Object.keys(ships);
     shipsArray.forEach((ship) => {
       const coordArray = Object.keys(ships[ship].coords);
@@ -59,7 +59,7 @@ const DOM = (() => {
     } else if (player === 'player2Board') {
       const playerBoard = document.querySelector('#player2Board');
       playerBoard.replaceWith(playerBoard.cloneNode(true));
-      if (gameLogic.player2.type === 'comp') {
+      if (Players.player2.type === 'comp') {
         AI.selectCoord();
       }
     }
@@ -68,7 +68,7 @@ const DOM = (() => {
     alert(`${player} wins`);
   };
   const addEventListeners = () => {
-    const squares = document.querySelectorAll('.square');
+    const squares = document.querySelectorAll('#gameboards-container .square');
     squares.forEach((square) => {
       square.addEventListener('click', getCoord);
     });
@@ -79,22 +79,18 @@ const DOM = (() => {
     launchAttack(playerBoard, coord);
   }
   function launchAttack(playerBoard, coord) {
-    gameLogic[`${playerBoard}`].receiveAttack(coord);
+    Boards[`${playerBoard}`].receiveAttack(coord);
     markMiss(playerBoard);
     markHit(playerBoard);
     addEventListeners();
     setTurn(playerBoard);
   }
-  const init = () => {
-    populateSquares();
-    addEventListeners();
-  };
   return {
+    populateSquares,
     launchAttack,
     setTurn,
-    init,
-    markShipPos,
     addEventListeners,
+    markShipPos,
     displayWin,
   };
 })();
