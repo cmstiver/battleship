@@ -20,3 +20,6 @@ body {
     border-radius: 10px;
     border: black solid 1px;
 }
+.square-occupied {
+    background-color: rgb(117, 117, 105);
+}
