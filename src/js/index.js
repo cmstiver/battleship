@@ -3,7 +3,7 @@ import DOM from './modules/DOM';
 import place from './modules/shipPlacerDOM';
 import createGameBoard from './modules/gameboard';
 import createPlayer from './modules/createPlayers';
-import { carrier } from './modules/ships';
+import AI from './modules/ai';
 
 const Players = (() => {
   const player1 = createPlayer('name1', 'human');
@@ -23,8 +23,6 @@ const Boards = (() => {
   };
 })();
 
-Boards.player2Board.placeShip(carrier, [1, 1], 'x');
-
 const hasSomeoneWon = () => {
   if (Boards.player1Board.isGameOver()) {
     DOM.displayWin('player2');
@@ -36,5 +34,6 @@ const hasSomeoneWon = () => {
 
 DOM.populateSquares();
 place.addStartEventListeners();
+AI.generateShips();
 
 export { Players, Boards, hasSomeoneWon };

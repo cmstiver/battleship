@@ -19,8 +19,20 @@ const createGameBoard = () => {
   };
   const checkIfValidPlacement = (array) => {
     const comparison = [];
+    const placed = [];
+    const { ships } = boardState;
+    const shipsArray = Object.keys(ships);
+    shipsArray.forEach((ship) => {
+      const shipCoords = Object.keys(ships[ship].coords);
+      shipCoords.forEach((coord) => {
+        placed.push(coord);
+      });
+    });
     array.forEach((coord) => {
       if (coord[0] > 10 || coord[0] < 0 || coord[1] > 10 || coord[1] < 0) {
+        comparison.push(false);
+      }
+      if (placed.includes(coord.join())) {
         comparison.push(false);
       }
     });

@@ -32,11 +32,12 @@ const place = (() => {
         }
         break;
       case 4:
-        Boards.player1Board.placeShip(patrolBoat, newCoord, axis);
-        document.querySelector('#start').remove();
-        DOM.markShipPos();
-        DOM.addEventListeners();
-        DOM.setTurn('player1Board');
+        if (Boards.player1Board.placeShip(patrolBoat, newCoord, axis) === true) {
+          document.querySelector('#start').remove();
+          DOM.markShipPos();
+          DOM.addEventListeners();
+          DOM.setTurn('player1Board');
+        }
         break;
       default:
     }
