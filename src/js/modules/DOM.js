@@ -26,6 +26,12 @@ const DOM = (() => {
       });
     });
   };
+  const unMarkShipPos = () => {
+    const squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+      square.classList.remove('square-occupied');
+    });
+  };
   const markMiss = (playerBoard) => {
     Boards[playerBoard].boardState.dodgedShots.forEach((coord) => {
       const square = document.querySelector(`#${playerBoard} [data-coord='${coord}']`);
@@ -61,13 +67,31 @@ const DOM = (() => {
       }
     });
   };
+  const passTurnScreen = () => {
+    const container = document.querySelector('#start-container');
+    container.innerHTML = `
+    <div id="pass">
+      <button onclick="this.parentNode.remove()">Pass</button>
+    </div>
+    `;
+  };
   const setTurn = (player) => {
     if (player === 'player1Board') {
       const playerBoard = document.querySelector('#player1Board');
       playerBoard.replaceWith(playerBoard.cloneNode(true));
+      unMarkShipPos();
+      markShipPos('player1Board');
+      if (Players.player2.type === 'human') {
+        passTurnScreen();
+      }
     } else if (player === 'player2Board') {
       const playerBoard = document.querySelector('#player2Board');
       playerBoard.replaceWith(playerBoard.cloneNode(true));
+      unMarkShipPos();
+      if (Players.player2.type === 'human') {
+        markShipPos('player2Board');
+        passTurnScreen();
+      }
       if (Players.player2.type === 'comp') {
         AI.selectCoord();
       }

@@ -2,7 +2,6 @@ import '../style.css';
 import DOM from './modules/DOM';
 import place from './modules/shipPlacerDOM';
 import createGameBoard from './modules/gameboard';
-import AI from './modules/ai';
 
 const Players = (() => {
   let player1;

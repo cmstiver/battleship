@@ -97,3 +97,19 @@ body {
 .shadow {
     background-color: gray;
 }
+#pass {
+    position: fixed;
+    background-color: cornflowerblue;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+}
+#pass button {
+    display: block;
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    margin-top: 200px;
+}
