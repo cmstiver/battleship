@@ -49,6 +49,18 @@ const DOM = (() => {
       });
     });
   };
+  const markSunkShips = (playerBoard) => {
+    const { ships } = Boards[playerBoard].boardState;
+    const shipsArray = Object.keys(ships);
+    shipsArray.forEach((ship) => {
+      if (ships[ship].isSunk()) {
+        Object.keys(ships[ship].coords).forEach((coord) => {
+          const square = document.querySelector(`#${playerBoard} [data-coord='${coord}']`);
+          square.classList.add('skull');
+        });
+      }
+    });
+  };
   const setTurn = (player) => {
     if (player === 'player1Board') {
       const playerBoard = document.querySelector('#player1Board');
@@ -79,6 +91,7 @@ const DOM = (() => {
     Boards[`${playerBoard}`].receiveAttack(coord);
     markMiss(playerBoard);
     markHit(playerBoard);
+    markSunkShips(playerBoard);
     addEventListeners();
     setTurn(playerBoard);
   }
