@@ -11,6 +11,7 @@
     "ignorePatterns": ["__tests__", "dist", "node_modules"],
     "rules": {
         "no-plusplus": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "import/no-cycle": "off"
     }
 }

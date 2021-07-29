@@ -1,3 +1,5 @@
+import gameLogic from './gameLogic';
+
 const createGameBoard = () => {
   const boardState = {
     ships: {},
@@ -45,8 +47,7 @@ const createGameBoard = () => {
     if (hit === false) {
       boardState.dodgedShots.push(coords);
     }
-    isGameOver();
-    console.log(boardState);
+    gameLogic.hasSomeoneWon();
   };
   return {
     placeShip,

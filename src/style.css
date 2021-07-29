@@ -23,3 +23,9 @@ body {
 .square-occupied {
     background-color: rgb(117, 117, 105);
 }
+.miss {
+    background-color: blue;
+}
+.hit {
+    background-color: red;
+}

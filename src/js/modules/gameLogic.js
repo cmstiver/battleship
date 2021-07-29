@@ -1,9 +1,14 @@
+import DOM from './DOM';
 import createGameBoard from './gameboard';
+import createPlayer from './players';
 import {
   carrier, battleship, destroyer, submarine, patrolBoat,
 } from './ships';
 
 const gameLogic = (() => {
+  const player1 = createPlayer('temp1', 'human');
+  const player2 = createPlayer('temp2', 'comp');
+
   const player1Board = createGameBoard();
   const player2Board = createGameBoard();
 
@@ -20,11 +25,20 @@ const gameLogic = (() => {
     player2Board.placeShip(submarine, [5, 1], 'y');
     player2Board.placeShip(patrolBoat, [6, 1], 'y');
   };
+  const hasSomeoneWon = () => {
+    if (player1Board.isGameOver()) {
+      DOM.displayWin('player2');
+    }
+    if (player2Board.isGameOver()) {
+      DOM.displayWin('player1');
+    }
+  };
 
   return {
     player1Board,
     player2Board,
     populateShipsTemp,
+    hasSomeoneWon,
   };
 })();
 

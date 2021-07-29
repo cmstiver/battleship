@@ -1,6 +1,7 @@
 import gameLogic from './gameLogic';
 
 const DOM = (() => {
+  const playerArray = ['player1Board', 'player2Board'];
   const gameboards = document.querySelectorAll('.gameboard');
   const populateSquares = () => {
     gameboards.forEach((element) => {
@@ -18,7 +19,6 @@ const DOM = (() => {
     populateSquares();
   };
   const markShipPos = () => {
-    const playerArray = ['player1Board', 'player2Board'];
     playerArray.forEach((player) => {
       const { ships } = gameLogic[player].boardState;
       const shipsArray = Object.keys(ships);
@@ -31,19 +31,50 @@ const DOM = (() => {
       });
     });
   };
+  const markMiss = (playerBoard) => {
+    gameLogic[playerBoard].boardState.dodgedShots.forEach((coord) => {
+      const square = document.querySelector(`#${playerBoard} [data-coord='${coord}']`);
+      if (!square.classList.contains('miss')) {
+        square.classList.add('miss');
+      }
+    });
+  };
+  const markHit = (playerBoard) => {
+    const { ships } = gameLogic[playerBoard].boardState;
+    const shipsArray = Object.keys(ships);
+    shipsArray.forEach((ship) => {
+      const coordArray = Object.keys(ships[ship].coords);
+      coordArray.forEach((coord) => {
+        if (ships[ship].coords[coord].isHit === true) {
+          const square = document.querySelector(`#${playerBoard} [data-coord='${coord}']`);
+          if (!square.classList.contains('hit')) {
+            square.classList.add('hit');
+          }
+        }
+      });
+    });
+  };
+  const launchAttack = (e) => {
+    const playerBoard = e.target.parentElement.id;
+    const { coord } = e.path[0].dataset;
+    gameLogic[`${playerBoard}`].receiveAttack(coord);
+    markMiss(playerBoard);
+    markHit(playerBoard);
+  };
+  const displayWin = (player) => {
+    alert(`${player} wins`);
+  };
   const addEventListeners = () => {
-    function coordLog(e) {
-      gameLogic[`${this.parentElement.id}`].receiveAttack(e.path[0].dataset.coord);
-    }
     const squares = document.querySelectorAll('.square');
     squares.forEach((square) => {
-      square.addEventListener('click', coordLog);
+      square.addEventListener('click', launchAttack);
     });
   };
   return {
     init,
     markShipPos,
     addEventListeners,
+    displayWin,
   };
 })();
 
