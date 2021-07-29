@@ -33,7 +33,7 @@ const hasSomeoneWon = () => {
 };
 
 DOM.populateSquares();
-place.addStartEventListeners();
+place.addDOMStuff();
 AI.generateShips();
 
 export { Players, Boards, hasSomeoneWon };
