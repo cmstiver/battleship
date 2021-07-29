@@ -7,7 +7,7 @@ import AI from './modules/ai';
 
 const Players = (() => {
   const player1 = createPlayer('name1', 'human');
-  const player2 = createPlayer('name2', 'comp');
+  const player2 = createPlayer('name2', 'human');
   return {
     player1,
     player2,
@@ -34,6 +34,8 @@ const hasSomeoneWon = () => {
 
 DOM.populateSquares();
 place.addDOMStuff();
-AI.generateShips();
+if (Players.player2.type === 'comp') {
+  AI.generateShips();
+}
 
 export { Players, Boards, hasSomeoneWon };

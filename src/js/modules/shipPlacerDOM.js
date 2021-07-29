@@ -14,7 +14,7 @@ const place = (() => {
     shipsArray.forEach((ship) => {
       const shipCoords = Object.keys(ships[ship].coords);
       shipCoords.forEach((coord) => {
-        const square = document.querySelector(`#start [data-coord='${coord}']`);
+        const square = document.querySelector(`.start [data-coord='${coord}']`);
         square.classList.add('square-occupied');
       });
     });
@@ -53,7 +53,7 @@ const place = (() => {
         break;
       case 4:
         if (Boards.player1Board.placeShip(patrolBoat, newCoord, axis) === true) {
-          document.querySelector('#start').remove();
+          document.querySelector('.start').remove();
           DOM.addEventListeners();
           DOM.setTurn('player1Board');
           if (Players.player2.type === 'comp') {
@@ -65,7 +65,7 @@ const place = (() => {
     }
   };
   const changeAxis = () => {
-    const axisButton = document.querySelector('#start button');
+    const axisButton = document.querySelector('.start button');
     if (axis === 'x') {
       axis = 'y';
       axisButton.textContent = 'y';
@@ -93,7 +93,7 @@ const place = (() => {
       ) {
         return;
       }
-      const square = document.querySelector(`#start [data-coord='${newCoord}']`);
+      const square = document.querySelector(`.start [data-coord='${newCoord}']`);
       square.classList.add('shadow');
     }
   };
@@ -116,14 +116,14 @@ const place = (() => {
       ) {
         return;
       }
-      const square = document.querySelector(`#start [data-coord='${newCoord}']`);
+      const square = document.querySelector(`.start [data-coord='${newCoord}']`);
       square.classList.remove('shadow');
     }
   };
   const addDOMStuff = () => {
-    const axisButton = document.querySelector('#start button');
+    const axisButton = document.querySelector('.start button');
     axisButton.addEventListener('click', changeAxis);
-    const squares = document.querySelectorAll('#start .square');
+    const squares = document.querySelectorAll('.start .square');
     squares.forEach((square) => {
       square.addEventListener('click', placeBoat);
       square.addEventListener('mouseover', hoverShadow);

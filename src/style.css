@@ -2,7 +2,7 @@ body {
     background-color: gray;
     margin: 0;
 }
-#start {
+.start {
     position: fixed;
     background-color: cornflowerblue;
     height: 100%;
@@ -11,7 +11,7 @@ body {
     left: 0px;
     z-index: 1000;
 }
-#start button {
+.start button {
     display: block;
     margin: auto;
     height: 50px;
@@ -22,12 +22,14 @@ body {
     margin-top: 100px;
 }
 #gameboards-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: block;
+    margin: auto;
+    width: 600px;
 }
 .gameboard {
     display: grid;
+    margin-top: 25px;
+    margin-bottom: 25px;
     grid-template-columns: repeat(10, auto);
     background-color: aquamarine;
     height: 600px;
