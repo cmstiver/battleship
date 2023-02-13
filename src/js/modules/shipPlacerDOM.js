@@ -62,7 +62,7 @@ const place = (() => {
     });
   };
   const placeBoat = (e) => {
-    const { coord } = e.path[0].dataset;
+    const { coord } = e.composedPath()[0].dataset;
     const split = coord.split(',');
     const newCoord = split.map((x) => +x);
     switch (num) {
@@ -129,7 +129,7 @@ const place = (() => {
     }
   };
   const hoverShadow = (e) => {
-    const { coord } = e.path[0].dataset;
+    const { coord } = e.composedPath()[0].dataset;
     for (let i = 0; i < shadowLength; i++) {
       const coordArray = coord.split(',').map((x) => +x);
       let newCoord = '';
@@ -152,7 +152,7 @@ const place = (() => {
     }
   };
   const removeShadow = (e) => {
-    const { coord } = e.path[0].dataset;
+    const { coord } = e.composedPath()[0].dataset;
     for (let i = 0; i < shadowLength + 1; i++) {
       const coordArray = coord.split(',').map((x) => +x);
       let newCoord = '';
