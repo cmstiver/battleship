@@ -114,7 +114,7 @@ const DOM = (() => {
   };
   function getCoord(e) {
     const playerBoard = e.target.parentElement.id;
-    const { coord } = e.path[0].dataset;
+    const { coord } = e.composedPath()[0].dataset;
     launchAttack(playerBoard, coord);
   }
   function launchAttack(playerBoard, coord) {
